@@ -6,6 +6,7 @@ const leftEye1 = [243, 190, 56, 28, 27, 29, 30, 247, 130, 25, 110, 24, 23, 22, 2
 const leftEye2 = [133, 173, 157, 158, 159, 160, 161, 246, 33, 7, 163, 144, 145, 153, 154, 155];
 const rightEye1 = [359, 467, 260, 259, 257, 258, 286, 414, 463, 341, 256, 252, 253, 254, 339, 255];
 const rightEye2 = [263, 466, 388, 387, 386, 385, 384, 398, 362, 382, 381, 380, 374, 373, 390, 249];
+const mouth = [78, 95, 88, 178, 87, 14, 317, 402, 318, 324, 308, 191, 80, 81, 82, 13, 312, 311, 310, 415, 308];
 
 function setup() {
   createCanvas(640, 480).position((windowWidth - 640) / 2, (windowHeight - 480) / 2);
@@ -32,14 +33,14 @@ function draw() {
 
   image(video, 0, 0, width, height);
 
-  stroke(255, 0, 0);
-  strokeWeight(15);
+  strokeWeight(5); // Set line thickness to 5px
   noFill();
 
   if (predictions.length > 0) {
     const keypoints = predictions[0].scaledMesh;
 
     // Draw main points
+    stroke(255, 0, 0, 127); // Red stroke with 50% transparency
     beginShape();
     for (let i = 0; i < points.length; i++) {
       const [x, y] = keypoints[points[i]];
@@ -48,8 +49,8 @@ function draw() {
     endShape(CLOSE);
 
     // Draw left eye (first set)
-    fill(255, 0, 0); // Red fill
-    stroke(0, 255, 0); // Green stroke
+    fill(255, 0, 0, 127); // Red fill with 50% transparency
+    stroke(0, 255, 0, 127); // Green stroke with 50% transparency
     beginShape();
     for (let i = 0; i < leftEye1.length; i++) {
       const [x, y] = keypoints[leftEye1[i]];
@@ -77,6 +78,16 @@ function draw() {
     beginShape();
     for (let i = 0; i < rightEye2.length; i++) {
       const [x, y] = keypoints[rightEye2[i]];
+      vertex(x, y);
+    }
+    endShape(CLOSE);
+
+    // Draw mouth
+    fill(255, 255, 0, 127); // Yellow fill with 50% transparency
+    stroke(255, 0, 0, 127); // Red stroke with 50% transparency
+    beginShape();
+    for (let i = 0; i < mouth.length; i++) {
+      const [x, y] = keypoints[mouth[i]];
       vertex(x, y);
     }
     endShape(CLOSE);
