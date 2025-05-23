@@ -48,6 +48,8 @@ function draw() {
     endShape(CLOSE);
 
     // Draw left eye (first set)
+    fill(255, 0, 0); // Red fill
+    stroke(0, 255, 0); // Green stroke
     beginShape();
     for (let i = 0; i < leftEye1.length; i++) {
       const [x, y] = keypoints[leftEye1[i]];
