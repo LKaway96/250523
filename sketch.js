@@ -21,6 +21,11 @@ function modelReady() {
 
 function draw() {
   background(220);
+
+  // Flip the canvas horizontally
+  translate(width, 0);
+  scale(-1, 1);
+
   image(video, 0, 0, width, height);
 
   stroke(255, 0, 0);
